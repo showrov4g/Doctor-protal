@@ -7,21 +7,21 @@ const Navbar = () => {
         <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400'>
             <img className='w-44 cursor-pointer' src={assets.logo} alt="" />
             <ul className='hidden md:flex items-start gap-5 font-medium'>
-                <NavLink>
-                    <li>Home</li>
-                    <hr />
+                <NavLink to='/'>
+                    <li className='py-1'>Home</li>
+                    <hr className='border-none outline-none h-0.5 bg-primary w-3/5 mx-auto hidden' />
                 </NavLink>
-                <NavLink>
-                    <li>All Doctors</li>
-                    <hr />
+                <NavLink to='/doctors'>
+                    <li className='py-1'>All Doctors</li>
+                    <hr className='border-none outline-none h-0.5 bg-primary w-3/5 mx-auto hidden' />
                 </NavLink>
-                <NavLink>
-                    <li>ABOUT</li>
-                    <hr />
+                <NavLink to='about'>
+                    <li className='py-1'>ABOUT</li>
+                    <hr className='border-none outline-none h-0.5 bg-primary w-3/5 mx-auto hidden' />
                 </NavLink>
-                <NavLink>
-                    <li>Contact</li>
-                    <hr />
+                <NavLink to='concat'>
+                    <li className='py-1'>Contact</li>
+                    <hr  className='border-none outline-none h-0.5 bg-primary w-3/5 mx-auto hidden'/>
                 </NavLink>
             </ul>
             <div>
