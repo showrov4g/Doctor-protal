@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
-import './App.css'
 import { Route, Routes } from 'react-router'
 import Home from './Pages/Home'
 import Doctors from './Pages/Doctors'
@@ -10,12 +9,14 @@ import Contact from './Pages/Contact'
 import MyProfile from './Pages/MyProfile'
 import MyAppointments from './Pages/MyAppointments'
 import Appointment from './Pages/Appointment'
+import Navbar from './Components/Navbar'
 
 function App() {
 
   return (
     <>
       <div className='mx-4 sm:mx-[10%]'>
+        <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/doctors' element={<Doctors/>} />
