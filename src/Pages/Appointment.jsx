@@ -10,6 +10,7 @@ const Appointment = () => {
   const [docSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState("");
+  const daysOfweek = ['SUN',"MON","TUE","WED",'THU',"FRI"]
   const fetchDocInfo = async () => {
     const doctorInfo = doctors?.find((doc) => doc._id === docId);
     setDocInfo(doctorInfo);
@@ -110,6 +111,11 @@ const Appointment = () => {
             </div>
           </div>
         </div>
+        {/* Booking slots */}
+        <div className="">
+
+        </div>
+        
       </div>
     )
   );
