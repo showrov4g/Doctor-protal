@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AppContext } from "../Context/AppContext";
 import { assets } from "../assets/assets";
+import RelatedDoctors from "../Components/RelatedDoctors";
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -65,7 +66,6 @@ const Appointment = () => {
     getAvailableSlots();
   }, [docInfo]);
   useEffect(() => {
-    console.log(docSlots);
   }, [docSlots]);
 
   return (
@@ -127,10 +127,10 @@ const Appointment = () => {
               ))
             }
           </div>
-          <div>
+          <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4">
             {
               docSlots.length && docSlots[slotIndex].map((item, index)=>(
-                <p key={index}>
+                <p onClick={()=>setSlotTime(item.time)} className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? "bg-primary text-white":"text-gray-400 border border-gray-500"}`} key={index}>
                   {
                     item.time.toLowerCase()
                   }
@@ -138,6 +138,11 @@ const Appointment = () => {
               ))
             }
           </div>
+          <button className="bg-primary text-white text-sm px-14 py-3 rounded-full my-6">Book an appointment</button>
+        </div>
+        {/* related doctors  */}
+        <div>
+          <RelatedDoctors docId={docId} specialty={docInfo.speciality}></RelatedDoctors>
         </div>
       </div>
     )
