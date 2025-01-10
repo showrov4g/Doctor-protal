@@ -10,46 +10,51 @@ const Appointment = () => {
   const [docSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState("");
-  const daysOfweek = ['SUN',"MON","TUE","WED",'THU',"FRI"]
+  const daysOfWeek = ["SUN","MON", "TUE", "WED", "THU","FRI","SAT"];
   const fetchDocInfo = async () => {
     const doctorInfo = doctors?.find((doc) => doc._id === docId);
     setDocInfo(doctorInfo);
   };
   //   =============
   const getAvailableSlots = async () => {
-    setDocSlots([])
+    setDocSlots([]);
     // getting current date
-    let today = new Date()
-    for (let i=0; i<7 ; i++){
-        //getting date with Index
-        let currentDate = new Date(today)
-        currentDate.setDate(today.getDate()+i)
-        //setting end time with index
-        let endTime = new Date()
-        endTime.setDate(today.getDate()+i)
-        endTime.setHours(21,0,0,0)
-        //setting hours
-        if(today.getDate()=== currentDate.getDate()){
-            currentDate.setHours(currentDate.getHours()>10 ? currentDate.getHours()+1 : 10)
-            currentDate.setMinutes(currentDate.getMinutes>30 ? 30 : 0)
-        }else{
-            currentDate.setHours(10)
-            currentDate.setMinutes(0)
-        }
+    let today = new Date();
+    for (let i = 1; i < 8; i++) {
+      //getting date with Index
+      let currentDate = new Date(today);
+      currentDate.setDate(today.getDate() + i);
+      //setting end time with index
+      let endTime = new Date();
+      endTime.setDate(today.getDate() + i);
+      endTime.setHours(21, 0, 0, 0);
+      //setting hours
+      if (today.getDate() === currentDate.getDate()) {
+        currentDate.setHours(
+          currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10
+        );
+        currentDate.setMinutes(currentDate.getMinutes > 30 ? 30 : 0);
+      } else {
+        currentDate.setHours(10);
+        currentDate.setMinutes(0);
+      }
 
-        let timeSlots = []
+      let timeSlots = [];
 
-        while(currentDate < endTime){
-            let formattedTime = currentDate.toLocaleTimeString([], {hour: "2-digit", minutes : "2-digit"})
-            // add slots to array
-            timeSlots.push({
-                dateTime: new Date(currentDate),
-                time: formattedTime
-            })
-            // increment current time by 30 minutes
-            currentDate.setMinutes(currentDate.getMinutes()+30 )
-        }
-        setDocSlots(prev => ([...prev, timeSlots]))
+      while (currentDate < endTime) {
+        let formattedTime = currentDate.toLocaleTimeString([], {
+          hour: "2-digit",
+          minutes: "2-digit",
+        });
+        // add slots to array
+        timeSlots.push({
+          dateTime: new Date(currentDate),
+          time: formattedTime,
+        });
+        // increment current time by 30 minutes
+        currentDate.setMinutes(currentDate.getMinutes() + 30);
+      }
+      setDocSlots((prev) => [...prev, timeSlots]);
     }
   };
   useEffect(() => {
@@ -59,11 +64,9 @@ const Appointment = () => {
   useEffect(() => {
     getAvailableSlots();
   }, [docInfo]);
-  useEffect(()=>{
-    console.log(docSlots)
-
-  },[docSlots])
-
+  useEffect(() => {
+    console.log(docSlots);
+  }, [docSlots]);
 
   return (
     docInfo && (
@@ -112,10 +115,19 @@ const Appointment = () => {
           </div>
         </div>
         {/* Booking slots */}
-        <div className="">
-
+        <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+          <p>Booking slots</p>
+          <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
+            {
+              docSlots.length && docSlots?.map((item, index)=>(
+                <div onClick={()=>setSlotIndex(index)} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ?"bg-primary text-white " : "border border-gray-500"}`} key={index}>
+                  <p>{item[0]&& daysOfWeek[item[0]?.dateTime?.getDay()]}</p>
+                  <p>{item[0]&&item[0].dateTime?.getDate()}</p>
+                </div>
+              ))
+            }
+          </div>
         </div>
-        
       </div>
     )
   );
