@@ -20,7 +20,7 @@ const Appointment = () => {
     setDocSlots([]);
     // getting current date
     let today = new Date();
-    for (let i = 1; i < 8; i++) {
+    for (let i = 0; i < 7; i++) {
       //getting date with Index
       let currentDate = new Date(today);
       currentDate.setDate(today.getDate() + i);
@@ -44,7 +44,7 @@ const Appointment = () => {
       while (currentDate < endTime) {
         let formattedTime = currentDate.toLocaleTimeString([], {
           hour: "2-digit",
-          minutes: "2-digit",
+          minute: "2-digit",
         });
         // add slots to array
         timeSlots.push({
@@ -124,6 +124,17 @@ const Appointment = () => {
                   <p>{item[0]&& daysOfWeek[item[0]?.dateTime?.getDay()]}</p>
                   <p>{item[0]&&item[0].dateTime?.getDate()}</p>
                 </div>
+              ))
+            }
+          </div>
+          <div>
+            {
+              docSlots.length && docSlots[slotIndex].map((item, index)=>(
+                <p key={index}>
+                  {
+                    item.time.toLowerCase()
+                  }
+                </p>
               ))
             }
           </div>
