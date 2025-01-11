@@ -1,15 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
-  font-family: "Outfit", serif; 
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+* {
+  font-family: "Outfit", serif;
 }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.active hr{
-  @apply block 
+.active hr {
+  @apply block;
 }
 
-::-webkit-scrollbar{
-  @apply hidden
+::-webkit-scrollbar {
+  @apply hidden;
+}
+@media (max-width: 740px) {
+  .active p{
+    @apply text-white bg-primary;
+  }
 }
